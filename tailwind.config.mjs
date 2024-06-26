@@ -1,4 +1,4 @@
-import defaultTheme from "tailwindcss/defaultTheme"
+import defaultTheme from "tailwindcss/defaultTheme";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -7,8 +7,30 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Poppins', ...defaultTheme.fontFamily.sans]
-      }
+      },
     },
   },
-  plugins: [],
+  variants: {
+    textShadow: ['responsive', 'hover', 'focus'],
+  },
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.text-shadow-sm': {
+          textShadow: '2px 2px 4px var(--tw-shadow-color)',
+        },
+        '.text-shadow-md': {
+          textShadow: '2px 2px 6px var(--tw-shadow-color)',
+        },
+        '.text-shadow-lg': {
+          textShadow: '3px 3px 8px var(--tw-shadow-color)',
+        },
+        '.text-shadow-none': {
+          textShadow: 'none',
+        },
+      };
+
+      addUtilities(newUtilities, ['responsive', 'hover', 'focus']);
+    }
+  ],
 }
