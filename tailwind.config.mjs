@@ -8,14 +8,32 @@ export default {
       fontFamily: {
         sans: ['Poppins', ...defaultTheme.fontFamily.sans]
       },
+      animation: {
+        'background': 'image-hero',
+        'text': 'text-hero'
+      },
+      keyframes: {
+        'image-hero': {
+          '0%': { transform: 'scale(1)', filter: 'grayscale(0.5)' },
+          '100%': { transform: 'scale(1.5)', filter: 'grayscale(1) brightness(0)' },
+        },
+        'text-hero': {
+          '0%': { opacity: 1 },
+          '100%': { opacity: 0, transform: 'translateY(35vh)' }
+        }
+      }
     },
   },
   variants: {
     textShadow: ['responsive', 'hover', 'focus'],
   },
   plugins: [
-    function ({ addUtilities }) {
+    function ({ addUtilities, theme }) {
       const newUtilities = {
+        '.animate-scroll': {
+          animationTimeline: 'view()',
+          animationRange: 'exit'
+        },
         '.text-shadow-sm': {
           textShadow: '2px 2px 4px var(--tw-shadow-color)',
         },
